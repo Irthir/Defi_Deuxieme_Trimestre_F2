@@ -1,11 +1,10 @@
 #include "Hote.h"
 
-int nFonctionnement=1;
+int nFonctionnementHote=1;
 
 void hote(void)
 {
     pthread_t threadRecept;
-    //pthread_t threadEnvoi;
 
     WSADATA WSAData;
     int erreur = WSAStartup(MAKEWORD(2,2), &WSAData);
@@ -55,20 +54,21 @@ void hote(void)
                     csock = accept(sock, (SOCKADDR*)&csin, &recsize);
                     printf("Un client se connecte avec la socket %d de %s:%d\n", csock, inet_ntoa(csin.sin_addr), htons(csin.sin_port));
 
-                    //pthread_create(&threadEnvoi,NULL,EnvoieHote,(void*)csock);//Cette thread va disparaitre avec le temps car nous n'avons pas besoin de tout le temps envoyer.
                     pthread_create(&threadRecept,NULL,ReceptionHote,(void*)csock);
 
-                    printf("Le tchat est lancé.\n");
+                    system("cls");
+                    printf("Le tchat est lance.\nLe jeu est lance.\n");
 
                     char cBuffer[100];
 
-
-                    while(nFonctionnement)
+                    Introduction();
+                    while(nFonctionnementHote>0)
                     {
                         fgets(cBuffer,sizeof(cBuffer),stdin);
+
                         char *cInput=cBuffer;
                         char *cVerb=strtok(cInput," \n");
-                        char *cNoun=strtok(NULL," \n");
+                        char *cNoun=strtok(NULL,"");
                         if (cVerb!=NULL)
                         {
                             if (strcmp(strupr(cVerb),"TCHAT")==0)
@@ -77,13 +77,13 @@ void hote(void)
                                 Commande();
                             else if(strcmp(strupr(cVerb),"QUITTER")==0)
                             {
-                                nFonctionnement=0;
+                                nFonctionnementHote=0;
                                 cNoun="Sulta";
                                 //Ca veut dire "Fin" en draconique de D&D pour éviter qu'un joueur rentre ça sans faire exprès.
                                 EnvoieHote(cNoun,csock);
                             }
                             else
-                                printf("%s\n",cBuffer);
+                                Avertissement();
                         }
                     }
 
@@ -95,12 +95,12 @@ void hote(void)
                 }
             }
             /* Fermeture de la socket */
-            printf("Fermeture de la socket...\n");
             closesocket(sock);
-            printf("Fermeture du serveur terminee\n");
+            printf("Fermeture de la connexion.\n");
         }
     }
     WSACleanup();
+    printf("Fermeture du jeu.\n");
     return EXIT_SUCCESS;
 }
 
@@ -120,14 +120,14 @@ void showHost()
 void* ReceptionHote(void* data)
 {
     char cBufferReception[100];
-    while (nFonctionnement)
+    while (nFonctionnementHote>0)
     {
         /* Si l'on reçoit des informations : on les affiche à l'écran */
         if (recv((int)data, cBufferReception, 100, 0) != SOCKET_ERROR)
         {
-            if (strcmp(strupr(cBufferReception),"Sulta")==0)
+            if (strcmp(cBufferReception,"Sulta")==0)
             {
-                nFonctionnement=0;
+                nFonctionnementHote=0;
             }
             else
             {
@@ -145,7 +145,10 @@ void EnvoieHote(char *cBuffer, SOCKET cSock)
     sock_err = send(cSock, cBuffer, 100, 0);
 
     if(sock_err != SOCKET_ERROR)
-        printf("[Serveur]: %s\n", cBuffer);
+    {
+        if (strcmp(cBuffer,"Sulta")!=0)
+            printf("[Serveur]: %s\n", cBuffer);
+    }
     else
         printf("Erreur de transmission\n");
 

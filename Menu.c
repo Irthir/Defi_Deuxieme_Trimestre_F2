@@ -1,6 +1,5 @@
 #include "Menu.h"
 
-
 void Menu(int erreur)
 {
     int nFonctionnement=1;
@@ -15,12 +14,14 @@ void Menu(int erreur)
 
         if(cEntreeMenu=='h' || cEntreeMenu=='H')
         {
+            system("cls");
             hote();
             getchar();
             fflush(stdin);
         }
         else if(cEntreeMenu=='c' || cEntreeMenu=='C')
         {
+            system("cls");
             client();
             getchar();
             fflush(stdin);

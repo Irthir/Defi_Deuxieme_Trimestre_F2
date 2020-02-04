@@ -4,6 +4,8 @@
 
 #include <stdio.h>
 void Commande();
+void Avertissement();
+void Introduction();
 
 #endif
 
