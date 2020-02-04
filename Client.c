@@ -41,6 +41,7 @@ void client(void)
             char cBuffer[100];
 
             Introduction();
+            AfficheSalleJ2();
             while(nFonctionnementClient>0)
             {
                 fgets(cBuffer,sizeof(cBuffer),stdin);
@@ -62,11 +63,33 @@ void client(void)
                         //Ca veut dire "Fin" en draconique de D&D pour éviter qu'un joueur rentre ça sans faire exprès.
                         EnvoieClient(cNoun,sock);
                     }
+                    else if(strcmp(strupr(cVerb),"INDICE")==0)
+                        Indice();
+                    else if(strcmp(strupr(cVerb),"INSPECTER")==0)
+                    {
+                        if (strcmp(strupr(cNoun),"TELEVISION")==0)
+                            descTelevision();
+                        else if (strcmp(strupr(cNoun),"GRAVURE")==0)
+                        {
+                            CarreMagique();
+                            descGravure();
+                        }
+                        else if (strcmp(strupr(cNoun),"BOUGIE")==0)
+                            descBougie();
+                        else
+                            nonReconnu();
+                    }
+                    else if(strcmp(strupr(cVerb),"REPONSE")==0)
+                    {
+                        if (strcmp(strupr(cNoun),"1")==0)
+                            printf("Reponse 1\n");
+                        else if (strcmp(strupr(cNoun),"2")==0)
+                            printf("Reponse 2\n");
+                    }
                     else
                         Avertissement();
                 }
             }
-
             pthread_join(threadRecept,NULL);
         }
         /* sinon, on affiche "Impossible de se connecter" */

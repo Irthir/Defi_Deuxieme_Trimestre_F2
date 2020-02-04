@@ -10,6 +10,7 @@
 typedef int socklen_t;
 
 #include "Commande.h"
+#include "Affichage.h"
 
 #include <stdio.h>
 #include <stdlib.h>

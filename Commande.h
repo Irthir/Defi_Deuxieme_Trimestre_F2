@@ -6,6 +6,8 @@
 void Commande();
 void Avertissement();
 void Introduction();
+void Indice();
+void nonReconnu();
 
 #endif
 

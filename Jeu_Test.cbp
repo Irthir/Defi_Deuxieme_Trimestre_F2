@@ -43,6 +43,10 @@
 			<Add library="lib/libws2_32.a" />
 			<Add directory="include" />
 		</Linker>
+		<Unit filename="Affichage.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Affichage.h" />
 		<Unit filename="Client.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -51,6 +55,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Commande.h" />
+		<Unit filename="Enigme.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Enigme.h" />
 		<Unit filename="Hote.c">
 			<Option compilerVar="CC" />
 		</Unit>

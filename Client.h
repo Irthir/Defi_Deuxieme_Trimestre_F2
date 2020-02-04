@@ -15,6 +15,8 @@ typedef int socklen_t;
 #define PORT 23
 
 #include "Commande.h"
+#include "Affichage.h"
+#include "Enigme.h"
 
 void client();
 void* ReceptionClient(void* data);

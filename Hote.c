@@ -62,6 +62,8 @@ void hote(void)
                     char cBuffer[100];
 
                     Introduction();
+                    AfficheSalleJ1();
+
                     while(nFonctionnementHote>0)
                     {
                         fgets(cBuffer,sizeof(cBuffer),stdin);
@@ -81,6 +83,26 @@ void hote(void)
                                 cNoun="Sulta";
                                 //Ca veut dire "Fin" en draconique de D&D pour éviter qu'un joueur rentre ça sans faire exprès.
                                 EnvoieHote(cNoun,csock);
+                            }
+                            else if(strcmp(strupr(cVerb),"INDICE")==0)
+                                Indice();
+                            else if(strcmp(strupr(cVerb),"INSPECTER")==0)
+                            {
+                                if (strcmp(strupr(cNoun),"TABLEAU")==0)
+                                    descTableau();
+                                else if (strcmp(strupr(cNoun),"CAGE")==0)
+                                    descCage();
+                                else if (strcmp(strupr(cNoun),"PILE DE CUBES")==0 || strcmp(strupr(cNoun),"PILE")==0)
+                                    printf("Cubes\n");
+                                else
+                                    nonReconnu();
+                            }
+                            else if(strcmp(strupr(cVerb),"REPONSE")==0)
+                            {
+                                if (strcmp(strupr(cNoun),"1")==0)
+                                    printf("Reponse 1\n");
+                                else if (strcmp(strupr(cNoun),"2")==0)
+                                    printf("Reponse 2\n");
                             }
                             else
                                 Avertissement();
