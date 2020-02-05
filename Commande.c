@@ -13,7 +13,7 @@ void Avertissement()
 
 void Introduction()
 {
-    printf("Bienvenue a vous deux !\nPour sortir, vous allez devoir cooperer et resoudre des enigmes pour trouver le code à 4 caracteres, afin de vous aider, voici le seul indice dont vous disposez: \"RJBV\".\nBon courage !\n");
+    printf("Bienvenue a vous deux !\nPour sortir, vous allez devoir cooperer et resoudre des enigmes pour trouver le code a 4 caracteres, afin de vous aider, voici le seul indice dont vous disposez: \"RJBV\".\nBon courage !\n");
 }
 
 void Indice()

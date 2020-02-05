@@ -35,6 +35,7 @@
 			<Add option="-Wall" />
 		</Compiler>
 		<Linker>
+			<Add library="libws2_32.a" />
 			<Add directory="include" />
 		</Linker>
 		<Unit filename="Affichage.c">

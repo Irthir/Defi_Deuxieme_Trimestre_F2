@@ -36,7 +36,7 @@ void AfficheSalleJ1()
 void descTableau()
 {
 	color(BLANC, NOIR);
-	printf("Sur le mur à votre droite se trouve un tableau qui semble dater de la renaissance.\nEnfin c’est ce que vous pensez, vous n'avez jamais rien compris a l'art.");
+	printf("Sur le mur a votre droite se trouve un tableau qui semble dater de la renaissance.\nEnfin c'est ce que vous pensez, vous n'avez jamais rien compris a l'art.");
 	color(GRISCLAIR, NOIR);
 }
 
@@ -131,15 +131,14 @@ void descTelevision ()
 void descGravure ()
 {
 	//on affiche le carré magique au dessus
-	color (JAUNE, NOIR);
-	printf("Devant vous, une etrange tablette de bois jaune s'illumine.\n Une question s'affiche en dessous: <<Quel est le nombre manquant ?>>");
 	color(GRISCLAIR, NOIR);
+	printf("Devant vous, une etrange tablette de bois jaune s'illumine.\n Une question s'affiche en dessous: <<Quel est le nombre manquant ?>>");
 }
 
 void descBougie ()
 {
 	color(BLANC, NOIR);
-	printf("La flamme d'une bougie danse a votre droite … et … c'est juste une bougie.");
+	printf("La flamme d'une bougie danse a votre droite ... et ... c'est juste une bougie.");
 	color(GRISCLAIR, NOIR);
 }
 
