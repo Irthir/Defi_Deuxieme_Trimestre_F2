@@ -101,6 +101,7 @@ void hote(void)
                                 else if (strcmp(strupr(cNoun),"PILE DE CUBES")==0 || strcmp(strupr(cNoun),"PILE")==0)
                                 {
                                     affPile();
+
                                     if (nEnigme1==1)
                                         Code1();
                                 }
@@ -190,7 +191,7 @@ void* ReceptionHote(void* data)
     while (nFonctionnementHote>0)
     {
         /* Si l'on reçoit des informations : on les affiche à l'écran */
-        if (recv((int)data, cBufferReception, 100, 0) != SOCKET_ERROR)
+        if (nFonctionnementHote>0 && recv((int)data, cBufferReception, 100, 0) != SOCKET_ERROR)
         {
             if (strcmp(cBufferReception,"Sulta")==0)
             {

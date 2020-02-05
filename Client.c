@@ -157,7 +157,7 @@ void* ReceptionClient(void* data)
     while (nFonctionnementClient>0)
     {
         /* Si l'on reçoit des informations : on les affiche à l'écran */
-        if (recv((int)data, cBufferReception, 100, 0) != SOCKET_ERROR)
+        if (nFonctionnementClient>0 && recv((int)data, cBufferReception, 100, 0) != SOCKET_ERROR)
         {
             if (strcmp(cBufferReception,"Sulta")==0)
             {

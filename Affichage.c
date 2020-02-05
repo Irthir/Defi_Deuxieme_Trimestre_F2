@@ -36,14 +36,14 @@ void AfficheSalleJ1()
 void descTableau()
 {
 	color(BLANC, NOIR);
-	printf("Sur le mur a votre droite se trouve un tableau qui semble dater de la renaissance.\nEnfin c'est ce que vous pensez, vous n'avez jamais rien compris a l'art.");
+	printf("Sur le mur a votre droite se trouve un tableau qui semble dater de la renaissance.\nEnfin c'est ce que vous pensez, vous n'avez jamais rien compris a l'art.\n");
 	color(GRISCLAIR, NOIR);
 }
 
 void descCage()
 {
 	color(BLANC, NOIR);
-	printf("Sur la table devant vous se trouve une cage a oiseau vide et sinistre.");
+	printf("Sur la table devant vous se trouve une cage a oiseau vide et sinistre.\n");
 	color(GRISCLAIR, NOIR);
 }
 
@@ -64,6 +64,7 @@ void affPile()
         fclose(pFile);
     }
     color(GRISCLAIR, NOIR);
+    printf("A votre gauche se trouve une pile de cube rouge, et devant se trouve l'intitule : << Combien de cubes sont presents ? >>\n");
 }
 
 void enigmeJ1()
@@ -103,7 +104,7 @@ void AfficheSalleJ2()
 void descTelevision ()
 {
 	color(BLANC, NOIR);
-	printf("Une television se trouve a votre gauche, elle n'affiche que de la neige peu importe ce que vous faites.");
+	printf("Une television se trouve a votre gauche, elle n'affiche que de la neige peu importe ce que vous faites.\n");
 	color(GRISCLAIR, NOIR);
 }
 
@@ -111,13 +112,13 @@ void descGravure ()
 {
 	//on affiche le carré magique au dessus
 	color(GRISCLAIR, NOIR);
-	printf("Devant vous, une etrange tablette de bois jaune s'illumine.\n Une question s'affiche en dessous: <<Quel est le nombre manquant ?>>");
+	printf("Devant vous, une etrange tablette de bois jaune s'illumine.\n Une question s'affiche en dessous: <<Quel est le nombre manquant ?>>\n");
 }
 
 void descBougie ()
 {
 	color(BLANC, NOIR);
-	printf("La flamme d'une bougie danse a votre droite ... et ... c'est juste une bougie.");
+	printf("La flamme d'une bougie danse a votre droite ... et ... c'est juste une bougie.\n");
 	color(GRISCLAIR, NOIR);
 }
 
