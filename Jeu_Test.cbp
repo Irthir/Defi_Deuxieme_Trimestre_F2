@@ -15,9 +15,6 @@
 					<Add option="-g" />
 				</Compiler>
 				<Linker>
-					<Add library="lib/libpthreadGC2.a" />
-					<Add library="lib/libpthreadGCE2.a" />
-					<Add library="lib/libws2_32.a" />
 					<Add directory="../../Defi_Deuxième_Trimestre/include" />
 				</Linker>
 			</Target>
