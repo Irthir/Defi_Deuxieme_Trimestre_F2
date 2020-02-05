@@ -36,33 +36,56 @@ void AfficheSalleJ1()
 void descTableau()
 {
 	color(BLANC, NOIR);
-	printf("Sur le mur à votre droite se trouve un tableau qui semble dater de la renaissance.\nEnfin c’est ce que vous pensez, vous n’avez jamais rien compris à l’art.");
+	printf("Sur le mur à votre droite se trouve un tableau qui semble dater de la renaissance.\nEnfin c’est ce que vous pensez, vous n'avez jamais rien compris a l'art.");
 	color(GRISCLAIR, NOIR);
 }
 
 void descCage()
 {
 	color(BLANC, NOIR);
-	printf("Sur la table devant vous se trouve une cage à oiseau vide et sinistre.");
+	printf("Sur la table devant vous se trouve une cage a oiseau vide et sinistre.");
 	color(GRISCLAIR, NOIR);
 }
-/*
+
 void affPile()
 {
-	FILE * fichier = fopen("cube.txt", "r");
-    if (fichier != NULL)
-    {
-    	color (ROUGE, NOIR);
-        while(fgets(chaine, MAX, fichier) != NULL)
-        {
-            printf("%s", chaine);
-        }
-    }
-	fclose(fichier);
+    color(ROUGE,NOIR);
 
-	printf("A votre gauche se trouve une pile de cube rouge, et devant se trouve l’intitulé : << Combien de cubes sont presents ? >>\n");
+	FILE * pFile;
+
+    char * mot = malloc(sizeof(*mot));
+    char nvMot[2];
+    int nbChar = 0;
+    int nbMots = 0;
+    pFile = fopen("cube.txt", "r");
+    if (pFile != NULL)
+    {
+        char a;
+        while(a != EOF)
+        {
+            a = fgetc(pFile);
+            nvMot[0] = a;
+            if(a != EOF && a != '\n')
+            {
+                nbChar++;
+                mot = realloc(mot, nbChar*sizeof(*mot));
+                strcat(mot, nvMot);
+            }
+            if(a == '\n')
+            {
+                nbMots++;
+                strcat(mot, " ");
+                printf("%s(%i)(%i)\n",mot, nbChar, nbMots);
+                nbChar = 0;
+                mot = realloc(mot, nbChar*sizeof(*mot));
+            }
+        }
+        free(mot);
+        fclose(pFile);
+    }
+
 	color(GRISCLAIR, NOIR);
-}*/
+}
 
 void enigmeJ1()
 {
@@ -101,7 +124,7 @@ void AfficheSalleJ2()
 void descTelevision ()
 {
 	color(BLANC, NOIR);
-	printf("Une television se trouve a votre gauche, elle n’affiche que de la neige peu importe ce que vous faites.");
+	printf("Une television se trouve a votre gauche, elle n'affiche que de la neige peu importe ce que vous faites.");
 	color(GRISCLAIR, NOIR);
 }
 
@@ -109,14 +132,14 @@ void descGravure ()
 {
 	//on affiche le carré magique au dessus
 	color (JAUNE, NOIR);
-	printf("Devant vous, une etrange tablette de bois jaune s’illumine.\n Une question s’affiche en dessous: <<Quel est le nombre manquant ?>>");
+	printf("Devant vous, une etrange tablette de bois jaune s'illumine.\n Une question s'affiche en dessous: <<Quel est le nombre manquant ?>>");
 	color(GRISCLAIR, NOIR);
 }
 
 void descBougie ()
 {
 	color(BLANC, NOIR);
-	printf("La flamme d’une bougie danse a votre droite … et … c’est juste une bougie.");
+	printf("La flamme d'une bougie danse a votre droite … et … c'est juste une bougie.");
 	color(GRISCLAIR, NOIR);
 }
 
@@ -127,4 +150,40 @@ void enigmeJ2 ()
 	color(VERT, NOIR);
 	printf("Si 1 est egal a 5, 2 est egal a 25, 3 a 605, 4 a 10855, 5 est egal a quoi?\n");
 	color(GRISCLAIR, NOIR);
+}
+
+void Code1()
+{
+    color(GRISCLAIR, NOIR);
+    printf("Vous trouvez un morceau de code il y est note : ");
+    color(ROUGE,NOIR);
+    printf("C\n");
+    color(GRISCLAIR, NOIR);
+}
+
+void Code2()
+{
+    color(GRISCLAIR, NOIR);
+    printf("Vous trouvez un morceau de code il y est note : ");
+    color(JAUNE,NOIR);
+    printf("H\n");
+    color(GRISCLAIR, NOIR);
+}
+
+void Code3()
+{
+    color(GRISCLAIR, NOIR);
+    printf("Vous trouvez un morceau de code il y est note : ");
+    color(BLEU,NOIR);
+    printf("A\n");
+    color(GRISCLAIR, NOIR);
+}
+
+void Code4()
+{
+    color(GRISCLAIR, NOIR);
+    printf("Vous trouvez un morceau de code il y est note : ");
+    color(VERT,NOIR);
+    printf("T\n");
+    color(GRISCLAIR, NOIR);
 }

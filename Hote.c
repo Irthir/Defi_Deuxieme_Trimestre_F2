@@ -60,6 +60,9 @@ void hote(void)
                     printf("Le tchat est lance.\nLe jeu est lance.\n");
 
                     char cBuffer[100];
+                    int nEnigme1=0;
+                    int nEnigme2=0;
+                    int nFin=0;
 
                     Introduction();
                     AfficheSalleJ1();
@@ -70,17 +73,19 @@ void hote(void)
 
                         char *cInput=cBuffer;
                         char *cVerb=strtok(cInput," \n");
-                        char *cNoun=strtok(NULL,"");
                         if (cVerb!=NULL)
                         {
                             if (strcmp(strupr(cVerb),"TCHAT")==0)
+                            {
+                                char *cNoun=strtok(NULL,"");
                                 EnvoieHote(cNoun,csock);
+                            }
                             else if(strcmp(strupr(cVerb),"COMMANDE")==0)
                                 Commande();
                             else if(strcmp(strupr(cVerb),"QUITTER")==0)
                             {
                                 nFonctionnementHote=0;
-                                cNoun="Sulta";
+                                char *cNoun="Sulta";
                                 //Ca veut dire "Fin" en draconique de D&D pour éviter qu'un joueur rentre ça sans faire exprès.
                                 EnvoieHote(cNoun,csock);
                             }
@@ -88,28 +93,68 @@ void hote(void)
                                 Indice();
                             else if(strcmp(strupr(cVerb),"INSPECTER")==0)
                             {
+                                char *cNoun=strtok(NULL," \n");
                                 if (strcmp(strupr(cNoun),"TABLEAU")==0)
                                     descTableau();
                                 else if (strcmp(strupr(cNoun),"CAGE")==0)
                                     descCage();
                                 else if (strcmp(strupr(cNoun),"PILE DE CUBES")==0 || strcmp(strupr(cNoun),"PILE")==0)
-                                    printf("Cubes\n");
+                                {
+                                    affPile();
+                                    if (nEnigme1==1)
+                                        Code1();
+                                }
                                 else
                                     nonReconnu();
                             }
                             else if(strcmp(strupr(cVerb),"REPONSE")==0)
                             {
-                                if (strcmp(strupr(cNoun),"1")==0)
-                                    printf("Reponse 1\n");
+                                char *cNoun=strtok(NULL," \n");
+                                if (strcmp(strupr(cNoun),"10")==0)
+                                {
+                                    printf("C'est une bonne reponse !\n");
+                                    Code1();
+                                    printf("Un bouton etrange apparait, essayez la commande Bouton.\n");
+                                    nEnigme1=1;
+                                }
                                 else if (strcmp(strupr(cNoun),"2")==0)
-                                    printf("Reponse 2\n");
+                                {
+                                    printf("C'est une bonne reponse !\n");
+                                    Code3();
+                                    nEnigme2=1;
+                                }
+                            }
+                            else if(strcmp(strupr(cVerb),"BOUTON")==0)
+                            {
+                                enigmeJ1();
+                                if (nEnigme2==1)
+                                    Code3();
+                            }
+                            else if(strcmp(strupr(cVerb),"CODE")==0)
+                            {
+                                char *cNoun=strtok(NULL," \n");
+                                if (strcmp(strupr(cNoun),"CHAT")==0)
+                                {
+                                    Victoire();
+                                    nFin=1;
+                                }
+                                else
+                                    CodeMauvais();
+                            }
+                            else if(strcmp(strupr(cVerb),"SORTIR")==0)
+                            {
+                                if (nFin==1)
+                                {
+                                    Fin();
+                                    nFonctionnementHote=0;
+                                }
+                                else
+                                    Ferme();
                             }
                             else
                                 Avertissement();
                         }
                     }
-
-                    //pthread_join(threadEnvoi,NULL);
                     pthread_join(threadRecept,NULL);
 
                     /* Il ne faut pas oublier de fermer la connexion (fermée dans les deux sens) */

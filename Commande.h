@@ -8,6 +8,10 @@ void Avertissement();
 void Introduction();
 void Indice();
 void nonReconnu();
+void Victoire();
+void Fin();
+void Ferme();
+void CodeMauvais();
 
 #endif
 

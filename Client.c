@@ -39,6 +39,9 @@ void client(void)
             printf("Le tchat est lance.\nLe jeu est lance.\n");
 
             char cBuffer[100];
+            int nEnigme1=0;
+            int nEnigme2=0;
+            int nFin=0;
 
             Introduction();
             AfficheSalleJ2();
@@ -47,11 +50,11 @@ void client(void)
                 fgets(cBuffer,sizeof(cBuffer),stdin);
                 char *cInput=cBuffer;
                 char *cVerb=strtok(cInput," \n");
-                char *cNoun=strtok(NULL,"");
                 if (cVerb!=NULL)
                 {
                     if (strcmp(strupr(cVerb),"TCHAT")==0)
                     {
+                        char *cNoun=strtok(NULL,"");
                         EnvoieClient(cNoun,sock);
                     }
                     else if(strcmp(strupr(cVerb),"COMMANDE")==0)
@@ -59,7 +62,7 @@ void client(void)
                     else if(strcmp(strupr(cVerb),"QUITTER")==0)
                     {
                         nFonctionnementClient=0;
-                        cNoun="Sulta";
+                        char *cNoun="Sulta";
                         //Ca veut dire "Fin" en draconique de D&D pour éviter qu'un joueur rentre ça sans faire exprès.
                         EnvoieClient(cNoun,sock);
                     }
@@ -67,12 +70,15 @@ void client(void)
                         Indice();
                     else if(strcmp(strupr(cVerb),"INSPECTER")==0)
                     {
+                        char *cNoun=strtok(NULL," \n");
                         if (strcmp(strupr(cNoun),"TELEVISION")==0)
                             descTelevision();
                         else if (strcmp(strupr(cNoun),"GRAVURE")==0)
                         {
                             CarreMagique();
                             descGravure();
+                            if (nEnigme1==1)
+                                Code2();
                         }
                         else if (strcmp(strupr(cNoun),"BOUGIE")==0)
                             descBougie();
@@ -81,10 +87,47 @@ void client(void)
                     }
                     else if(strcmp(strupr(cVerb),"REPONSE")==0)
                     {
-                        if (strcmp(strupr(cNoun),"1")==0)
-                            printf("Reponse 1\n");
-                        else if (strcmp(strupr(cNoun),"2")==0)
-                            printf("Reponse 2\n");
+                        char *cNoun=strtok(NULL," \n");
+                        if (strcmp(strupr(cNoun),"36")==0)
+                        {
+                            printf("C'est une bonne reponse !\n");
+                            Code2();
+                            printf("Un bouton etrange apparait, essayez la commande Bouton.\n");
+                            nEnigme1=1;
+                        }
+                        else if (strcmp(strupr(cNoun),"1")==0)
+                        {
+                            printf("C'est une bonne reponse !\n");
+                            Code4();
+                            nEnigme2=1;
+                        }
+                    }
+                    else if(strcmp(strupr(cVerb),"BOUTON")==0)
+                    {
+                        enigmeJ2();
+                        if (nEnigme2==1)
+                            Code4();
+                    }
+                    else if(strcmp(strupr(cVerb),"CODE")==0)
+                    {
+                        char *cNoun=strtok(NULL," \n");
+                        if (strcmp(strupr(cNoun),"CHAT")==0)
+                        {
+                            Victoire();
+                            nFin=1;
+                        }
+                        else
+                            CodeMauvais();
+                    }
+                    else if(strcmp(strupr(cVerb),"SORTIR")==0)
+                    {
+                        if (nFin==1)
+                        {
+                            Fin();
+                            nFonctionnementClient=0;
+                        }
+                        else
+                            Ferme();
                     }
                     else
                         Avertissement();

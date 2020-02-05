@@ -17,4 +17,9 @@ void descGravure();
 void descBougie();
 void enigmeJ2();
 
+void Code1();
+void Code2();
+void Code3();
+void Code4();
+
 #endif
