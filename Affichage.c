@@ -50,13 +50,7 @@ void descCage()
 void affPile()
 {
     color(ROUGE,NOIR);
-
-	FILE * pFile;
-
-    char * mot = malloc(sizeof(*mot));
-    char nvMot[2];
-    int nbChar = 0;
-    int nbMots = 0;
+    FILE * pFile;
     pFile = fopen("cube.txt", "r");
     if (pFile != NULL)
     {
@@ -64,27 +58,12 @@ void affPile()
         while(a != EOF)
         {
             a = fgetc(pFile);
-            nvMot[0] = a;
-            if(a != EOF && a != '\n')
-            {
-                nbChar++;
-                mot = realloc(mot, nbChar*sizeof(*mot));
-                strcat(mot, nvMot);
-            }
-            if(a == '\n')
-            {
-                nbMots++;
-                strcat(mot, " ");
-                printf("%s(%i)(%i)\n",mot, nbChar, nbMots);
-                nbChar = 0;
-                mot = realloc(mot, nbChar*sizeof(*mot));
-            }
+
+            printf("%c",a);
         }
-        free(mot);
         fclose(pFile);
     }
-
-	color(GRISCLAIR, NOIR);
+    color(GRISCLAIR, NOIR);
 }
 
 void enigmeJ1()
