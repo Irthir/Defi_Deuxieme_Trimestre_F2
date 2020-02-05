@@ -156,7 +156,10 @@ void hote(void)
                                 Avertissement();
                         }
                     }
-                    pthread_join(threadRecept,NULL);
+
+
+                    pthread_exit(threadRecept);
+                    //pthread_join(threadRecept,NULL);
 
                     /* Il ne faut pas oublier de fermer la connexion (fermée dans les deux sens) */
                     shutdown(csock, 2);
